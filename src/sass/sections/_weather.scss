@@ -1,0 +1,191 @@
+.weather {
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+    }
+
+    &__widget {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 55px 26px 55px 34px;
+        border-radius: 35px;
+        background: linear-gradient(154.61deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
+        box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(20px);
+        position: relative;
+        isolation: isolate;
+        border: 1px solid transparent;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            padding: 1px;
+            border-radius: inherit;
+            background: linear-gradient(155.5deg, rgba(0, 0, 0, 0.48) 0%, rgba(27, 25, 25, 0.44) 12.7%, rgba(93, 84, 84, 0.33) 63.1%, rgba(147, 134, 134, 0.26) 100%);
+            pointer-events: none;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+        }
+
+        &-search {
+            position: relative;
+
+            &-img {
+                width: 50px;
+                height: 40px;
+                position: absolute;
+                inset: 50% 0px 50% 10px;
+                transform: translateY(-50%);
+                fill: $white-color;
+                z-index: 9;
+            }
+
+            &-input {
+                color: $white-color;
+                font-family: "Source Sans 3", sans-serif;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 1;
+                width: 100%;
+                border-radius: 24px;
+                border: 1px solid $border-color;
+                background-color: $input-bcg-color;
+                padding: 14px 16px 18px 73px;
+            }
+        }
+
+        &-weather {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            &-img {
+                width: 267px;
+                transition: 3s;
+            }
+
+            &-location {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 10px;
+
+                &-img {
+                    width: 20px;
+                    height: 20px;
+                    fill: $white-color;
+                }
+
+                &-title {
+                    display: flex;
+                    color: $white-color;
+                    font-family: "Sorts Mill Goudy", serif;
+                    font-size: 28px;
+                    font-weight: 400;
+                    line-height: 1;
+                }
+            }
+
+            &-temp {
+                color: $white-color;
+                font-family: "Solway", serif;
+                font-size: 48px;
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            &-time {
+                color: $white-color;
+                font-family: "Solway", serif;
+                font-size: 28px;
+                font-weight: 400;
+                line-height: 1;
+            }
+        }
+
+        &-future {
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+
+            &-title {
+                color: $white-color;
+                font-family: "Solway", serif;
+                font-size: 26px;
+                font-weight: 400;
+                line-height: 1;
+            }
+
+            &-days {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            &-day {
+                background: transparent;
+                mix-blend-mode: overlay;
+                backdrop-filter: blur(25px);
+                padding: 5px 5px 6px 3px;
+                color: $white-color;
+                font-family: "Solway", serif;
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 1.1;
+
+                &-active {
+                    background: linear-gradient(180deg, rgba(251, 251, 251, 0.87) 0%, rgba(255, 255, 255, 0.71) 100%);
+                }
+            }
+
+            &-box {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+                &-cart {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    &-img {
+                        width: 70px;
+                        height: 70px;
+                        background: linear-gradient(180deg, rgba(251, 251, 251, 0.87) 0%, rgba(255, 255, 255, 0.71) 100%);
+                        mix-blend-mode: overlay;
+                        backdrop-filter: blur(25px);
+                        fill: $white-color;
+                    }
+
+                    &-desc {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+
+                    &-time {
+                        color: $text-color;
+                        font-family: Solway;
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: 1.1;
+                    }
+
+                    &-weather {
+                        color: $text-color;
+                        font-family: Solway;
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: 1.1;
+                        opacity: .7;
+                    }
+                }
+            }
+        }
+    }
+};

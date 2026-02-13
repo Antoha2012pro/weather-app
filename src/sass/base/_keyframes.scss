@@ -1,0 +1,38 @@
+// Эффект скелетона (загрузки)
+.skeleton {
+  // Делаем текст прозрачным, чтобы видеть только фон
+  color: transparent !important; 
+  
+  // Фон с градиентом (бликом)
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0.1) 25%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  
+  // Анимация движения блика
+  animation: shimmer 1.5s infinite;
+  
+  // Скругление, чтобы было красиво
+  border-radius: 8px;
+  
+  // Минимальная ширина/высота, чтобы пустые элементы не схлопывались
+  min-height: 20px; 
+  min-width: 50px;
+  
+  // Для картинок, чтобы убрать иконку "битой картинки" во время загрузки
+  img {
+    opacity: 0; 
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

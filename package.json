@@ -1,0 +1,32 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "dev": "npx parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Antoha2012pro/weather-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Antoha2012pro/weather-app/issues"
+  },
+  "homepage": "https://github.com/Antoha2012pro/weather-app#readme",
+  "dependencies": {
+    "@parcel/transformer-posthtml": "^2.16.4",
+    "@parcel/transformer-sass": "^2.16.4",
+    "debounce": "^3.0.0",
+    "lodash": "^4.17.23",
+    "modern-normalize": "^3.0.1",
+    "parcel": "^2.16.4",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "posthtml": "^0.16.7",
+    "posthtml-include": "^2.0.1"
+  }
+}
