@@ -1,7 +1,7 @@
 import debounce from "lodash/debounce";
 
 const API_KEY = "e961f79282fa40b0b20172127261302";
-const API_URL = "http://api.weatherapi.com/v1";
+const API_URL = "https://api.weatherapi.com/v1";
 
 let city;
 let days;
