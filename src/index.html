@@ -14,11 +14,8 @@
 </head>
 
 <body>
-    <include src="img/symbol-defs.svg"></include>
-
-
-
     <section class="weather">
+        <img src="#" alt="Background" class="weather__foto">
         <div class="container">
             <div class="weather__widget">
                 <button class="weather__widget-btn weather__widget-btn-up" type="button">
@@ -75,8 +72,19 @@
                 </div>
                 <div class="weather__highlights">
                     <h2 class="weather__highlights-title">Today’s Highlights</h2>
-                    <div class="weather__highlights-widget weather__highlights-widget-left"></div>
-                    <div class="weather__highlights-widget weather__highlights-widget-right"></div>
+                    <div class="weather__highlights-wrapper">
+                        <div class="weather__highlights-widget weather__highlights-widget-left">
+                            <p class="weather__highlights-widget-text">UV Index - <span class="weather__highlights-widget-text-span weather__highlights-widget-text-span" id="uvIndex"></span></p>
+                            <p class="weather__highlights-widget-text">Wind Speed - <span class="weather__highlights-widget-text-span" id="windSpeed"></span></p>
+                            <p class="weather__highlights-widget-text">Sunrise - <span class="weather__highlights-widget-text-span" id="sunrise"></span></p>
+                            <p class="weather__highlights-widget-text">Sunset - <span class="weather__highlights-widget-text-span" id="sunset"></span></p>
+                        </div>
+                        <div class="weather__highlights-widget weather__highlights-widget-right">
+                            <p class="weather__highlights-widget-text">Humidity - <span class="weather__highlights-widget-text-span" id="humidity"></span></p>
+                            <p class="weather__highlights-widget-text">Visibility - <span class="weather__highlights-widget-text-span" id="visibility"></span></p>
+                            <p class="weather__highlights-widget-text">Air Quality - <span class="weather__highlights-widget-text-span" id="airQuality"></span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +92,7 @@
 
     <script type="module" src="./js/widget.js"></script>
     <script type="module" src="./js/time.js"></script>
+    <script type="module" src="./js/highlights.js"></script>
 </body>
 
 </html>

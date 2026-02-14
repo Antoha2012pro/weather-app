@@ -87,8 +87,8 @@ const fetchAllData = async (city) => {
     toggleLoading(true);
     try {
         const [currentRes, forecastRes] = await Promise.all([
-            fetch(`${API_URL}/current.json?key=${API_KEY}&q=${city}`),
-            fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${city}&days=3`)
+            fetch(`${API_URL}/current.json?key=${API_KEY}&q=${city}&lang=uk`),
+            fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${city}&days=3&lang=uk`)
         ]);
 
         if (!currentRes.ok || !forecastRes.ok) throw new Error("Город не знайдено");
@@ -170,6 +170,6 @@ searchInputEl.addEventListener("input", debounce((event) => {
     }
 }, 500));
 
-setTimeout(() => {
-    fetchAllData("Kyiv");
-}, 50);
+// setTimeout(() => {
+//     fetchAllData("Kyiv");
+// }, 50);

@@ -125,7 +125,7 @@ body {
   }
 }
 .weather {
-  background: linear-gradient(70deg, rgba(123, 148, 218, 0.786) 30%, rgba(61, 212, 131, 0.661) 70%);
+  background: url("../img/weather.jpg") 50%/cover no-repeat, #ffffff;
   height: 100vh;
 }
 .weather .container {
@@ -467,7 +467,7 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 47px;
+  justify-content: space-between;
 }
 .weather__time {
   display: flex;
@@ -543,4 +543,55 @@ body {
   font-size: 48px;
   font-weight: 400;
   line-height: 0.9;
+}
+.weather__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.weather__highlights-title {
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Solway", serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 0.9;
+  margin: 0px 0px 0px 3px;
+}
+.weather__highlights-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.weather__highlights-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 50px 30px 40px 34px;
+  border-radius: 35px;
+  background: linear-gradient(124.42deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+}
+.weather__highlights-widget::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(125.52deg, rgba(0, 0, 0, 0.48) 0%, rgba(27, 25, 25, 0.44) 12.7%, rgba(93, 84, 84, 0.33) 63.1%, rgba(147, 134, 134, 0.26) 100%);
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.weather__highlights-widget-text {
+  color: #FFF;
+  font-family: "Solway", serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
 }/*# sourceMappingURL=main.css.map */

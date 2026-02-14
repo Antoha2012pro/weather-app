@@ -21,7 +21,7 @@ const formatCustomTime = (dateString) => {
 const fetchAllData = async (city) => {
     // toggleLoading(true);
     try {
-        const response = await fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${city}&days=1`);
+        const response = await fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${city}&days=1&lang=uk`);
 
         if (!response.ok) throw new Error("Город не знайдено");
 
