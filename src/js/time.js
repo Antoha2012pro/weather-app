@@ -70,6 +70,6 @@ searchInputEl.addEventListener("input", debounce((event) => {
     }
 }, 500));
 
-setTimeout(() => {
-    fetchAllData("Kyiv");
-}, 50);
+// setTimeout(() => {
+//     fetchAllData("Kyiv");
+// }, 50);
