@@ -1,49 +1,162 @@
 .weather {
-    background: url("../img/weather.jpg") 50% / cover no-repeat, #FFF;
+    // background: url("../img/weather.jpg") 50% / cover no-repeat, #ffffff;
+    background: linear-gradient(70deg,
+            rgba(123, 148, 218, 0.786) 30%,
+            rgba(61, 212, 131, 0.661) 70%);
     height: 100vh;
 
     .container {
         display: flex;
         flex-direction: row;
         gap: 50px;
+
+        @media (max-width: 1100px) {
+            flex-direction: column;
+        }
     }
 
     &__widget {
         display: flex;
         flex-direction: column;
         gap: 30px;
+        width: 30%;
+        min-width: 350px;
+        flex-shrink: 0;
         padding: 55px 26px 55px 34px;
-        border-radius: 35px;
         position: relative;
-        isolation: isolate;
-        border: none;
+        border-radius: 35px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
         background: linear-gradient(160deg,
                 rgba(255, 255, 255, 0.40) 0%,
                 rgba(255, 255, 255, 0.10) 100%);
-        backdrop-filter: blur(20px) saturate(150%);
-        -webkit-backdrop-filter: blur(40px) saturate(150%);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        border: none;
+
+        scrollbar-width: none; // Firefox
+
+        &::-webkit-scrollbar {
+            display: none; // Chrome, Safari
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
 
         &::before {
             content: "";
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            padding: 1px;
-
-            background: linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.6) 0%,
-                    rgba(255, 255, 255, 0.1) 40%,
-                    rgba(255, 255, 255, 0.05) 100%);
-
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-
             pointer-events: none;
             z-index: 1;
+
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.45) 0%,
+                    rgba(255, 255, 255, 0.12) 40%,
+                    rgba(255, 255, 255, 0.06) 100%);
+
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+            opacity: 0.9;
+        }
+
+
+        @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            backdrop-filter: blur(18px) saturate(140%);
+        }
+
+        @supports (-webkit-mask: linear-gradient(#fff 0 0)) and (-webkit-mask-composite: xor) {
+            &::before {
+                padding: 1px;
+                opacity: 1;
+                box-shadow: none;
+
+                background: linear-gradient(135deg,
+                        rgba(255, 255, 255, 0.6) 0%,
+                        rgba(255, 255, 255, 0.1) 40%,
+                        rgba(255, 255, 255, 0.05) 100%);
+
+                -webkit-mask:
+                    linear-gradient(#fff 0 0) content-box,
+                    linear-gradient(#fff 0 0);
+                -webkit-mask-composite: xor;
+            }
+        }
+
+        @media (max-width: 480px) {
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+
+            @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+                -webkit-backdrop-filter: blur(10px) saturate(120%);
+                backdrop-filter: blur(10px) saturate(120%);
+            }
+        }
+
+        @media (prefers-reduced-transparency: reduce) {
+            background: rgba(255, 255, 255, 0.92);
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+
+            &::before {
+                opacity: 0.6;
+            }
+        }
+
+        &-btn {
+            position: sticky; // Самое важное: они липнут к краям при скролле
+            z-index: 50; // Чтобы были поверх контента
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto; // Центрируем по горизонтали
+
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            color: white;
+            cursor: pointer;
+
+            opacity: 0; // Скрыты по умолчанию
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none; // Чтобы не мешали кликать, когда невидимы
+
+            svg {
+                width: 24px;
+                height: 24px;
+                fill: white;
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.5);
+                transform: scale(1.1);
+            }
+
+            // Класс видимости (добавляется через JS)
+            &.is-visible {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+            }
+        }
+
+        // Специфика для кнопки ВВЕРХ
+        &-btn-up {
+            top: 10px; // Прилипает к верху с отступом 10px
+            margin-bottom: -40px; // Хак: подтягиваем контент, чтобы кнопка не занимала лишнее место
+        }
+
+        // Специфика для кнопки ВНИЗ
+        &-btn-down {
+            bottom: 10px; // Прилипает к низу
+            margin-top: 10px; // Отступ от контента сверху
         }
 
         &-search {
@@ -90,25 +203,30 @@
         &-weather {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 7px;
+            padding: 0px 22px 0px 24px;
 
             &-img {
-                width: 267px;
-                transition: 3s;
+                width: 100%;
+                transition: 2s ease-in-out;
+                margin: 0px auto 10px 0px;
+                opacity: 0;
             }
 
             &-location {
                 display: flex;
                 flex-direction: row;
-                gap: 26px;
+                align-items: center;
+                gap: 16px;
                 position: relative;
                 cursor: auto;
                 font-family: "Sorts Mill Goudy", serif;
 
                 &-img {
-                    width: 20px;
-                    height: 20px;
+                    width: 30px;
+                    height: 30px;
                     fill: $white-color;
+                    display: none;
                 }
 
                 &-title {
@@ -123,42 +241,42 @@
                     text-overflow: ellipsis;
                     max-width: 250px;
                     display: block;
-
-                    &-span {
-                        position: absolute;
-                        bottom: 100%;
-                        left: 50%;
-                        transform: translateX(-50%) translateY(0px);
-                        z-index: 10;
-
-                        width: max-content;
-                        max-width: 300px;
-                        padding: 8px 12px;
-                        margin-top: 10px;
-
-                        color: $white-color;
-                        font-family: "Sorts Mill Goudy", serif;
-                        font-size: 14px;
-                        font-weight: 400;
-                        text-align: center;
-                        white-space: normal;
-
-                        background: rgba(0, 0, 0, 0.6);
-                        backdrop-filter: blur(10px);
-                        -webkit-backdrop-filter: blur(10px);
-                        border: 1px solid rgba(255, 255, 255, 0.2);
-                        border-radius: 12px;
-                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
-                        opacity: 0;
-                        visibility: hidden;
-                        transition: all 0.3s ease;
-                        pointer-events: none;
-
-                    }
                 }
 
-                &:hover &-title-span {
+                &-span {
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(0px);
+                    z-index: 10;
+
+                    width: max-content;
+                    max-width: 300px;
+                    padding: 8px 12px;
+                    margin-top: 10px;
+
+                    color: $white-color;
+                    font-family: "Sorts Mill Goudy", serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    text-align: center;
+                    white-space: normal;
+
+                    background: rgba(0, 0, 0, 0.6);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 12px;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                    pointer-events: none;
+
+                }
+
+                &:hover &-span {
                     opacity: 1;
                     visibility: visible;
                     transform: translateX(-50%) translateY(-5px);
@@ -263,6 +381,12 @@
             }
         }
     }
-}
 
-;
+    &__content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: red;
+    }
+}

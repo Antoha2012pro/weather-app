@@ -7,20 +7,70 @@ let city;
 let days;
 
 const searchInputEl = document.querySelector(".weather__widget-search-input");
-const weatherImgEl = document.querySelector(".weather__widget-weather-img");
-const weatherTitleEl = document.querySelector(".weather__widget-weather-location-title");
-const weatherTempEl = document.querySelector(".weather__widget-weather-temp");
-const weatherTimeEl = document.querySelector(".weather__widget-weather-time");
 
-const uiElements = {
+const renderUiElementsObj = {
     weatherImg: document.querySelector(".weather__widget-weather-img"),
-    // weatherLocation: document.querySelector(".weather__widget-weather-location"),
     weatherLocationTitle: document.querySelector(".weather__widget-weather-location-title"),
-    weatherLocationTitleSpan: document.querySelector(".weather__widget-weather-location-title-span"),
+    weatherLocationSpan: document.querySelector(".weather__widget-weather-location-span"),
     weatherTemp: document.querySelector(".weather__widget-weather-temp"),
     weatherTime: document.querySelector(".weather__widget-weather-time"),
     futureBox: document.querySelector(".weather__widget-future-box"),
 };
+
+const elements = {
+    widget: document.querySelector('.weather__widget'),
+    widgetBtnUp: document.querySelector('.weather__widget-btn-up'),
+    widgetBtnDown: document.querySelector('.weather__widget-btn-down'),
+    weatherLocation: document.querySelector(".weather__widget-weather-location"),
+    weatherLocationImg: document.querySelector(".weather__widget-weather-location-img"),
+}
+
+const checkScroll = () => {
+    if (!elements.widget || !elements.widgetBtnUp || !elements.widgetBtnDown) return;
+    const scrollTop = elements.widget.scrollTop;
+    const isScrollable = elements.widget.scrollHeight > elements.widget.clientHeight;
+    const isAtBottom = Math.ceil(scrollTop + elements.widget.clientHeight) >= elements.widget.scrollHeight - 5;
+
+    // ЛОГИКА КНОПКИ ВВЕРХ
+    // Показываем, если прокрутили вниз больше чем на 20px
+    if (scrollTop > 20) {
+        elements.widgetBtnUp.classList.add('is-visible');
+    } else {
+        elements.widgetBtnUp.classList.remove('is-visible');
+    }
+
+    // ЛОГИКА КНОПКИ ВНИЗ
+    // Показываем, если контент длинный И мы еще не внизу
+    if (isScrollable && !isAtBottom) {
+        elements.widgetBtnDown.classList.add('is-visible');
+    } else {
+        elements.widgetBtnDown.classList.remove('is-visible');
+    }
+};
+
+function initScrollButtons() {
+    if (!elements.widget || !elements.widgetBtnUp || !elements.widgetBtnDown) return;
+
+    // Клик ВВЕРХ
+    elements.widgetBtnUp.onclick = () => {
+        elements.widget.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Клик ВНИЗ
+    elements.widgetBtnDown.onclick = () => {
+        elements.widget.scrollBy({ top: 150, behavior: 'smooth' });
+    };
+
+    // Слушаем скролл и изменение размера окна
+    elements.widget.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+    
+    // Первая проверка при запуске
+    checkScroll();
+}
+
+// Запускаем слушатели кнопок сразу
+initScrollButtons();
 
 searchInputEl.addEventListener("input", debounce(inputSearch, 500));
 
@@ -44,7 +94,7 @@ function inputSearch(event) {
 }
 
 const toggleLoading = (isLoading) => {
-    Object.values(uiElements).forEach(el => {
+    Object.values(renderUiElementsObj).forEach(el => {
         if (isLoading) {
             el.textContent = "";
             el.classList.add("skeleton");
@@ -75,12 +125,14 @@ const getWeatherData = async (city) => {
 }
 
 const renderWeather = async (object) => {
-    // uiElements.weatherLocation.style.cursor = "help";
-    uiElements.weatherImg.src = object.current.condition.icon;
-    uiElements.weatherLocationTitle.textContent = `${object.location.name}, ${object.location.country}`;
-    uiElements.weatherLocationTitleSpan.textContent = `${object.location.name}, ${object.location.country}`;
-    uiElements.weatherTemp.textContent = `${object.current.temp_c}°C`;
-    uiElements.weatherTime.textContent = formatCustomTime(object.location.localtime);
+    elements.weatherLocation.style.cursor = "help";
+    renderUiElementsObj.weatherImg.src = object.current.condition.icon;
+    renderUiElementsObj.weatherImg.style.opacity = "1";
+    elements.weatherLocationImg.style.display = "block";
+    renderUiElementsObj.weatherLocationTitle.textContent = `${object.location.name}, ${object.location.country}`;
+    renderUiElementsObj.weatherLocationSpan.textContent = `${object.location.name}, ${object.location.country}`;
+    renderUiElementsObj.weatherTemp.textContent = `${object.current.temp_c}°C`;
+    renderUiElementsObj.weatherTime.textContent = formatCustomTime(object.location.localtime);
 }
 
 
@@ -106,7 +158,7 @@ const getForecastData = async (city) => {
 }
 
 const renderFutureWeather = (data) => {
-    uiElements.futureBox.innerHTML = "";
+    renderUiElementsObj.futureBox.innerHTML = "";
 
     const nextDays = data.forecast.forecastday.slice(1);
 
@@ -128,6 +180,8 @@ const renderFutureWeather = (data) => {
             </div>
         `;
 
-        uiElements.futureBox.insertAdjacentHTML("beforeend", html);
+        renderUiElementsObj.futureBox.insertAdjacentHTML("beforeend", html);
     });
+    
+    setTimeout(checkScroll, 100);
 }

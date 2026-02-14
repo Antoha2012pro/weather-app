@@ -21,6 +21,11 @@
     <section class="weather">
         <div class="container">
             <div class="weather__widget">
+                <button class="weather__widget-btn weather__widget-btn-up" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z" fill="currentColor" />
+                    </svg>
+                </button>
                 <div class="weather__widget-search">
                     <svg class="weather__widget-search-img">
                         <use href="./img/symbol-defs.svg#icon-search"></use>
@@ -28,13 +33,13 @@
                     <input type="text" class="weather__widget-search-input" placeholder="Search city">
                 </div>
                 <div class="weather__widget-weather">
-                    <img src="#" alt="#" class="weather__widget-weather-img">
+                    <img src="#" alt="Weather" class="weather__widget-weather-img">
                     <div class="weather__widget-weather-location">
                         <svg class="weather__widget-weather-location-img">
                             <use href="./img/symbol-defs.svg#icon-loc"></use>
                         </svg>
                         <h3 class="weather__widget-weather-location-title"></h3>
-                        <span class="weather__widget-weather-location-title-span"></span>
+                        <span class="weather__widget-weather-location-span"></span>
                     </div>
                     <h2 class="weather__widget-weather-temp"></h2>
                     <p class="weather__widget-weather-time"></p>
@@ -56,8 +61,13 @@
                         </div> -->
                     </div>
                 </div>
+                <button class="weather__widget-btn weather__widget-btn-down" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z" fill="currentColor" />
+                    </svg>
+                </button>
             </div>
-            <div class="weather-content">
+            <div class="weather__content">
                 <div class="weather__time">
                     <h2 class="weather__time-title">Snow Thunderstorm</h2>
                     <ul class="weather__time-items">
