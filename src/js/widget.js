@@ -14,13 +14,25 @@ const weatherTimeEl = document.querySelector(".weather__widget-weather-time");
 
 const uiElements = {
     weatherImg: document.querySelector(".weather__widget-weather-img"),
+    // weatherLocation: document.querySelector(".weather__widget-weather-location"),
     weatherLocationTitle: document.querySelector(".weather__widget-weather-location-title"),
+    weatherLocationTitleSpan: document.querySelector(".weather__widget-weather-location-title-span"),
     weatherTemp: document.querySelector(".weather__widget-weather-temp"),
     weatherTime: document.querySelector(".weather__widget-weather-time"),
     futureBox: document.querySelector(".weather__widget-future-box"),
 };
 
 searchInputEl.addEventListener("input", debounce(inputSearch, 500));
+
+const formatCustomTime = (dateString) => {
+    const date = new Date(dateString);
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    return `${dayName}, ${hours}:${minutes} ${ampm}`;
+}
 
 function inputSearch(event) {
     const query = event.target.value.trim();
@@ -63,10 +75,12 @@ const getWeatherData = async (city) => {
 }
 
 const renderWeather = async (object) => {
+    // uiElements.weatherLocation.style.cursor = "help";
     uiElements.weatherImg.src = object.current.condition.icon;
     uiElements.weatherLocationTitle.textContent = `${object.location.name}, ${object.location.country}`;
+    uiElements.weatherLocationTitleSpan.textContent = `${object.location.name}, ${object.location.country}`;
     uiElements.weatherTemp.textContent = `${object.current.temp_c}°C`;
-    uiElements.weatherTime.textContent = object.location.localtime;
+    uiElements.weatherTime.textContent = formatCustomTime(object.location.localtime);
 }
 
 

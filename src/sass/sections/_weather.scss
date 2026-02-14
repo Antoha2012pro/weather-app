@@ -1,4 +1,6 @@
 .weather {
+    background: url("../img/weather.jpg") 50% / cover no-repeat, #FFF;
+    height: 100vh;
 
     .container {
         display: flex;
@@ -12,49 +14,76 @@
         gap: 30px;
         padding: 55px 26px 55px 34px;
         border-radius: 35px;
-        background: linear-gradient(154.61deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
-        box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(20px);
         position: relative;
         isolation: isolate;
-        border: 1px solid transparent;
+        border: none;
+        background: linear-gradient(160deg,
+                rgba(255, 255, 255, 0.40) 0%,
+                rgba(255, 255, 255, 0.10) 100%);
+        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(40px) saturate(150%);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
 
         &::before {
             content: "";
             position: absolute;
-            inset: -1px;
-            padding: 1px;
+            inset: 0;
             border-radius: inherit;
-            background: linear-gradient(155.5deg, rgba(0, 0, 0, 0.48) 0%, rgba(27, 25, 25, 0.44) 12.7%, rgba(93, 84, 84, 0.33) 63.1%, rgba(147, 134, 134, 0.26) 100%);
-            pointer-events: none;
-            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            padding: 1px;
+
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.6) 0%,
+                    rgba(255, 255, 255, 0.1) 40%,
+                    rgba(255, 255, 255, 0.05) 100%);
+
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
             mask-composite: exclude;
+
+            pointer-events: none;
+            z-index: 1;
         }
 
         &-search {
             position: relative;
+            font-family: "Source Sans 3", sans-serif;
 
             &-img {
-                width: 50px;
-                height: 40px;
+                width: 33px;
+                height: 30px;
                 position: absolute;
-                inset: 50% 0px 50% 10px;
-                transform: translateY(-50%);
+                inset: 19px 0px 0px 25px;
                 fill: $white-color;
                 z-index: 9;
             }
 
             &-input {
                 color: $white-color;
-                font-family: "Source Sans 3", sans-serif;
                 font-size: 24px;
                 font-weight: 400;
                 line-height: 1;
+                font-family: "Source Sans 3", sans-serif;
                 width: 100%;
                 border-radius: 24px;
                 border: 1px solid $border-color;
                 background-color: $input-bcg-color;
-                padding: 14px 16px 18px 73px;
+                padding: 16px 0px 16px 73px;
+                transition: 250ms;
+
+                &:focus {
+                    outline: none;
+                    opacity: .9;
+                }
+
+                &::placeholder {
+                    color: $white-color;
+                    font-size: 24px;
+                    font-weight: 400;
+                    line-height: 1;
+                    font-family: "Source Sans 3", sans-serif;
+                }
             }
         }
 
@@ -71,8 +100,10 @@
             &-location {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;
-                gap: 10px;
+                gap: 26px;
+                position: relative;
+                cursor: auto;
+                font-family: "Sorts Mill Goudy", serif;
 
                 &-img {
                     width: 20px;
@@ -87,6 +118,50 @@
                     font-size: 28px;
                     font-weight: 400;
                     line-height: 1;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 250px;
+                    display: block;
+
+                    &-span {
+                        position: absolute;
+                        bottom: 100%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(0px);
+                        z-index: 10;
+
+                        width: max-content;
+                        max-width: 300px;
+                        padding: 8px 12px;
+                        margin-top: 10px;
+
+                        color: $white-color;
+                        font-family: "Sorts Mill Goudy", serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        text-align: center;
+                        white-space: normal;
+
+                        background: rgba(0, 0, 0, 0.6);
+                        backdrop-filter: blur(10px);
+                        -webkit-backdrop-filter: blur(10px);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        border-radius: 12px;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.3s ease;
+                        pointer-events: none;
+
+                    }
+                }
+
+                &:hover &-title-span {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(-50%) translateY(-5px);
                 }
             }
 
@@ -150,15 +225,15 @@
                 &-cart {
                     display: flex;
                     flex-direction: row;
-                    justify-content: space-between;
                     align-items: center;
+                    gap: 40px;
 
                     &-img {
                         width: 70px;
                         height: 70px;
-                        background: linear-gradient(180deg, rgba(251, 251, 251, 0.87) 0%, rgba(255, 255, 255, 0.71) 100%);
+                        // background: linear-gradient(180deg, rgba(251, 251, 251, 0.87) 0%, rgba(255, 255, 255, 0.71) 100%);
                         mix-blend-mode: overlay;
-                        backdrop-filter: blur(25px);
+                        // backdrop-filter: blur(25px);
                         fill: $white-color;
                     }
 
@@ -169,7 +244,7 @@
                     }
 
                     &-time {
-                        color: $text-color;
+                        color: $white-color;
                         font-family: Solway;
                         font-size: 20px;
                         font-weight: 400;
@@ -188,4 +263,6 @@
             }
         }
     }
-};
+}
+
+;
