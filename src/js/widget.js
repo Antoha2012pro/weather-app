@@ -1,4 +1,5 @@
 import debounce from "lodash/debounce";
+import { checkVerticalButtons } from './contentScroll.js';
 
 const API_KEY = "e961f79282fa40b0b20172127261302";
 const API_URL = "https://api.weatherapi.com/v1";
@@ -98,7 +99,6 @@ const fetchAllData = async (city) => {
 
         renderCurrentWeather(currentData);
         renderForecast(forecastData);
-
     } catch (error) {
         console.error(error);
     } finally {
@@ -159,8 +159,8 @@ const renderForecast = (data) => {
     }).join('');
 
     futureBox.innerHTML = html;
-
     setTimeout(checkScroll, 100);
+    setTimeout(checkVerticalButtons, 100); 
 };
 
 searchInputEl.addEventListener("input", debounce((event) => {
@@ -170,6 +170,6 @@ searchInputEl.addEventListener("input", debounce((event) => {
     }
 }, 500));
 
-// setTimeout(() => {
-//     fetchAllData("Kyiv");
-// }, 50);
+setTimeout(() => {
+    fetchAllData("Berlin");
+}, 50);

@@ -3,9 +3,6 @@ import debounce from "lodash/debounce";
 const API_KEY = "e961f79282fa40b0b20172127261302";
 const API_URL = "https://api.weatherapi.com/v1";
 
-const F_API_URL = "https://pixabay.com/api";
-const F_API_KEY = "54640967-f174f6139fb35610610a281ef";
-
 const searchInputEl = document.querySelector(".weather__widget-search-input");
 
 const els = {
@@ -19,9 +16,7 @@ const els = {
         visibility: document.getElementById("visibility"),
         airQuality: document.getElementById("airQuality"),
     },
-    ui: {
-        weatherFoto: document.querySelector(".weather__foto"),
-    }
+    ui: {}
 };
 
 const toggleLoading = (isLoading) => {
@@ -82,30 +77,3 @@ searchInputEl.addEventListener("input", debounce((event) => {
 // setTimeout(() => {
 //     fetchAllData("Kyiv");
 // }, 50);
-
-const fetchFotosData = async () => {
-    try {
-        const response = await fetch(`${F_API_URL}?key=${F_API_KEY}&q=rain`);
-
-
-        if (!response.ok) throw new Error("Фотку не знайдено");
-
-        const data = await response.json();
-
-        renderRandomFotos(data);
-
-    } catch (error) {
-        console.error(error);
-    } finally {
-        toggleLoading(false);
-    }
-}
-
-// const renderRandomFotos = (data) => {
-//     const { ui } = els;
-//     const randomNum = Math.floor(Math.random() * (data.hits.length + 1));
-    
-//     ui.weatherFoto.src = `${data.hits[randomNum].largeImageURL}`
-// }
-
-fetchFotosData();

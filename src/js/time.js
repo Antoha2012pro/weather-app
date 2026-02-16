@@ -1,4 +1,5 @@
 import debounce from "lodash/debounce";
+import { watchImagesLoad } from './utils.js';
 
 const API_KEY = "e961f79282fa40b0b20172127261302";
 const API_URL = "https://api.weatherapi.com/v1";
@@ -9,7 +10,10 @@ const els = {
     forRender: {
         timeItems: document.querySelector(".weather__time-items"),
     },
-    ui: {},
+    ui: {
+        btnPrev: document.querySelector(".weather__time-btn-prev"),
+        btnNext: document.querySelector(".weather__time-btn-next"),
+    },
 };
 
 const formatCustomTime = (dateString) => {
@@ -17,6 +21,59 @@ const formatCustomTime = (dateString) => {
     const hours = date.getHours();
     return [`${hours}:00`, Number(hours)];
 };
+
+const checkScrollButtons = () => {
+    const list = els.forRender.timeItems;
+    const { btnPrev, btnNext } = els.ui;
+
+    if (!list) return;
+
+    // scrollLeft - сколько прокручено слева
+    // scrollWidth - полная ширина контента
+    // clientWidth - видимая ширина
+    const maxScrollLeft = list.scrollWidth - list.clientWidth;
+
+    // Если контента мало и скроллить некуда - скрываем обе
+    if (maxScrollLeft <= 0) {
+        btnPrev.classList.remove('is-visible');
+        btnNext.classList.remove('is-visible');
+        return;
+    }
+
+    // Левая кнопка: если прокрутили больше 0
+    if (list.scrollLeft > 0) {
+        btnPrev.classList.add('is-visible');
+    } else {
+        btnPrev.classList.remove('is-visible');
+    }
+
+    // Правая кнопка: если не дошли до конца (с запасом 1px)
+    if (list.scrollLeft < maxScrollLeft - 1) {
+        btnNext.classList.add('is-visible');
+    } else {
+        btnNext.classList.remove('is-visible');
+    }
+};
+
+const initScrollEvents = () => {
+    const list = els.forRender.timeItems;
+    const { btnPrev, btnNext } = els.ui;
+
+    // Прокрутка по клику (например, на 200px)
+    btnPrev.addEventListener('click', () => {
+        list.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+
+    btnNext.addEventListener('click', () => {
+        list.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+
+    // Проверка кнопок при скролле (в том числе ручном) и изменении размера окна
+    list.addEventListener('scroll', checkScrollButtons);
+    window.addEventListener('resize', checkScrollButtons);
+};
+
+// Инициализируем слушатели один раз
 
 const fetchAllData = async (city) => {
     // toggleLoading(true);
@@ -70,6 +127,6 @@ searchInputEl.addEventListener("input", debounce((event) => {
     }
 }, 500));
 
-// setTimeout(() => {
-//     fetchAllData("Kyiv");
-// }, 50);
+setTimeout(() => {
+    fetchAllData("Berlin");
+}, 50);

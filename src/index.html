@@ -64,28 +64,64 @@
                     </svg>
                 </button>
             </div>
-            <div class="weather__content">
-                <div class="weather__time">
-                    <h2 class="weather__time-title">Snow Thunderstorm</h2>
-                    <ul class="weather__time-items">
-                    </ul>
-                </div>
-                <div class="weather__highlights">
-                    <h2 class="weather__highlights-title">Today’s Highlights</h2>
-                    <div class="weather__highlights-wrapper">
-                        <div class="weather__highlights-widget weather__highlights-widget-left">
-                            <p class="weather__highlights-widget-text">UV Index - <span class="weather__highlights-widget-text-span weather__highlights-widget-text-span" id="uvIndex"></span></p>
-                            <p class="weather__highlights-widget-text">Wind Speed - <span class="weather__highlights-widget-text-span" id="windSpeed"></span></p>
-                            <p class="weather__highlights-widget-text">Sunrise - <span class="weather__highlights-widget-text-span" id="sunrise"></span></p>
-                            <p class="weather__highlights-widget-text">Sunset - <span class="weather__highlights-widget-text-span" id="sunset"></span></p>
+            <div class="weather__content-wrapper">
+                <button class="weather__scroll-btn weather__scroll-btn-up" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z" fill="currentColor" />
+                    </svg>
+                </button>
+                <div class="weather__content">
+                    <div class="weather__time">
+                        <h2 class="weather__time-title">Snow Thunderstorm</h2>
+                        <div class="weather__time-wrapper">
+                            <button class="weather__time-btn weather__time-btn-prev" type="button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
+
+                            <ul class="weather__time-items">
+                            </ul>
+
+                            <button class="weather__time-btn weather__time-btn-next" type="button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="weather__highlights-widget weather__highlights-widget-right">
-                            <p class="weather__highlights-widget-text">Humidity - <span class="weather__highlights-widget-text-span" id="humidity"></span></p>
-                            <p class="weather__highlights-widget-text">Visibility - <span class="weather__highlights-widget-text-span" id="visibility"></span></p>
-                            <p class="weather__highlights-widget-text">Air Quality - <span class="weather__highlights-widget-text-span" id="airQuality"></span></p>
+                    </div>
+                    <div class="weather__highlights">
+                        <h2 class="weather__highlights-title">Today’s Highlights</h2>
+                        <div class="weather__highlights-wrapper">
+                            <div class="weather__highlights-widget weather__highlights-widget-left">
+                                <p class="weather__highlights-widget-text">UV Index - <span
+                                        class="weather__highlights-widget-text-span weather__highlights-widget-text-span"
+                                        id="uvIndex"></span></p>
+                                <p class="weather__highlights-widget-text">Wind Speed - <span
+                                        class="weather__highlights-widget-text-span" id="windSpeed"></span></p>
+                                <p class="weather__highlights-widget-text">Sunrise - <span
+                                        class="weather__highlights-widget-text-span" id="sunrise"></span></p>
+                                <p class="weather__highlights-widget-text">Sunset - <span
+                                        class="weather__highlights-widget-text-span" id="sunset"></span></p>
+                            </div>
+                            <div class="weather__highlights-widget weather__highlights-widget-right">
+                                <p class="weather__highlights-widget-text">Humidity - <span
+                                        class="weather__highlights-widget-text-span" id="humidity"></span></p>
+                                <p class="weather__highlights-widget-text">Visibility - <span
+                                        class="weather__highlights-widget-text-span" id="visibility"></span></p>
+                                <p class="weather__highlights-widget-text">Air Quality - <span
+                                        class="weather__highlights-widget-text-span" id="airQuality"></span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="weather__scroll-btn weather__scroll-btn-down" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z" fill="currentColor" />
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
@@ -93,6 +129,7 @@
     <script type="module" src="./js/widget.js"></script>
     <script type="module" src="./js/time.js"></script>
     <script type="module" src="./js/highlights.js"></script>
+    <script type="module" src="./js/renderRandomFoto.js"></script>
 </body>
 
 </html>
