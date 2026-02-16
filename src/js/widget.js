@@ -1,8 +1,6 @@
 import debounce from "lodash/debounce";
 import { checkVerticalButtons } from './contentScroll.js';
-
-const API_KEY = "e961f79282fa40b0b20172127261302";
-const API_URL = "https://api.weatherapi.com/v1";
+import { API_KEY, API_URL, toggleLoading } from "./utils.js";
 
 const searchInputEl = document.querySelector(".weather__widget-search-input");
 
@@ -69,23 +67,8 @@ function initScrollButtons() {
 
 initScrollButtons();
 
-const toggleLoading = (isLoading) => {
-    Object.values(els.forRender).forEach(el => {
-        if (!el) return;
-
-        if (isLoading) {
-            if (el.tagName !== 'IMG') {
-                el.textContent = "";
-            }
-            el.classList.add("skeleton");
-        } else {
-            el.classList.remove("skeleton");
-        }
-    });
-};
-
 const fetchAllData = async (city) => {
-    toggleLoading(true);
+    toggleLoading(true, els);
     try {
         const [currentRes, forecastRes] = await Promise.all([
             fetch(`${API_URL}/current.json?key=${API_KEY}&q=${city}&lang=uk`),
@@ -102,7 +85,7 @@ const fetchAllData = async (city) => {
     } catch (error) {
         console.error(error);
     } finally {
-        toggleLoading(false);
+        toggleLoading(false, els);
     }
 }
 

@@ -1,5 +1,6 @@
 const API_URL = "https://pixabay.com/api";
 const API_KEY = "54640967-f174f6139fb35610610a281ef";
+import { toggleLoading } from "./utils.js";
 
 const els = {
     forRender: {},
@@ -8,23 +9,8 @@ const els = {
     }
 };
 
-const toggleLoading = (isLoading) => {
-    Object.values(els.forRender).forEach(el => {
-        if (!el) return;
-
-        if (isLoading) {
-            if (el.tagName !== 'IMG') {
-                el.textContent = "";
-            }
-            el.classList.add("skeleton");
-        } else {
-            el.classList.remove("skeleton");
-        }
-    });
-};
-
 const fetchFotosData = async () => {
-    toggleLoading(true);
+    toggleLoading(true, els);
     try {
         const response = await fetch(`${API_URL}?key=${API_KEY}&q=rain`);
 
@@ -38,7 +24,7 @@ const fetchFotosData = async () => {
     } catch (error) {
         console.error(error);
     } finally {
-        toggleLoading(false);
+        toggleLoading(false, els);
     }
 }
 

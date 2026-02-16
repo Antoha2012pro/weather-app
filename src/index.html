@@ -23,39 +23,41 @@
                         <path d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z" fill="currentColor" />
                     </svg>
                 </button>
-                <div class="weather__widget-search">
-                    <svg class="weather__widget-search-img">
-                        <use href="./img/symbol-defs.svg#icon-search"></use>
-                    </svg>
-                    <input type="text" class="weather__widget-search-input" placeholder="Search city">
-                </div>
-                <div class="weather__widget-weather">
-                    <img src="#" alt="Weather" class="weather__widget-weather-img">
-                    <div class="weather__widget-weather-location">
-                        <svg class="weather__widget-weather-location-img">
-                            <use href="./img/symbol-defs.svg#icon-loc"></use>
+                <div class="weather__widget--wrapper">
+                    <div class="weather__widget-search">
+                        <svg class="weather__widget-search-img">
+                            <use href="./img/symbol-defs.svg#icon-search"></use>
                         </svg>
-                        <h3 class="weather__widget-weather-location-title"></h3>
-                        <span class="weather__widget-weather-location-span"></span>
+                        <input type="text" class="weather__widget-search-input" placeholder="Search city">
                     </div>
-                    <h2 class="weather__widget-weather-temp"></h2>
-                    <p class="weather__widget-weather-time"></p>
-                </div>
-                <div class="weather__widget-future">
-                    <h2 class="weather__widget-future-title">The Next Day Forecast</h2>
-                    <!-- <div class="weather__widget-future-days">
+                    <div class="weather__widget-weather">
+                        <img src="#" alt="Weather" class="weather__widget-weather-img">
+                        <div class="weather__widget-weather-location">
+                            <svg class="weather__widget-weather-location-img">
+                                <use href="./img/symbol-defs.svg#icon-loc"></use>
+                            </svg>
+                            <h3 class="weather__widget-weather-location-title"></h3>
+                            <span class="weather__widget-weather-location-span"></span>
+                        </div>
+                        <h2 class="weather__widget-weather-temp"></h2>
+                        <p class="weather__widget-weather-time"></p>
+                    </div>
+                    <div class="weather__widget-future">
+                        <h2 class="weather__widget-future-title">The Next Day Forecast</h2>
+                        <!-- <div class="weather__widget-future-days">
                         <button class="weather__widget-future-day weather__widget-future-day-active"></button>
                         <button class="weather__widget-future-day"></button>
                         <button class="weather__widget-future-day"></button>
                     </div> -->
-                    <div class="weather__widget-future-box">
-                        <!-- <div class="weather__widget-future-box-cart">
+                        <div class="weather__widget-future-box">
+                            <!-- <div class="weather__widget-future-box-cart">
                             <div class="weather__widget-future-box-cart-img"></div>
                             <div class="weather__widget-future-box-cart-desc">
                                 <h3 class="weather__widget-future-box-cart-time"></h3>
                                 <p class="weather__widget-future-box-cart-weather"></p>
                             </div>
                         </div> -->
+                        </div>
                     </div>
                 </div>
                 <button class="weather__widget-btn weather__widget-btn-down" type="button">
@@ -125,6 +127,8 @@
             </div>
         </div>
     </section>
+
+    <script type="module" src="./js/utils.js"></script>
 
     <script type="module" src="./js/widget.js"></script>
     <script type="module" src="./js/time.js"></script>

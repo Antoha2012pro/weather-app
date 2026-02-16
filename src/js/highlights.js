@@ -1,7 +1,5 @@
 import debounce from "lodash/debounce";
-
-const API_KEY = "e961f79282fa40b0b20172127261302";
-const API_URL = "https://api.weatherapi.com/v1";
+import { API_KEY, API_URL, toggleLoading } from "./utils.js";
 
 const searchInputEl = document.querySelector(".weather__widget-search-input");
 
@@ -19,23 +17,8 @@ const els = {
     ui: {}
 };
 
-const toggleLoading = (isLoading) => {
-    Object.values(els.forRender).forEach(el => {
-        if (!el) return;
-
-        if (isLoading) {
-            if (el.tagName !== 'IMG') {
-                el.textContent = "";
-            }
-            el.classList.add("skeleton");
-        } else {
-            el.classList.remove("skeleton");
-        }
-    });
-};
-
 const fetchAllData = async (city) => {
-    toggleLoading(true);
+    toggleLoading(true, els);
     try {
         const response = await fetch(`${API_URL}/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=yes&lang=uk`);
 
@@ -48,7 +31,7 @@ const fetchAllData = async (city) => {
     } catch (error) {
         console.error(error);
     } finally {
-        toggleLoading(false);
+        toggleLoading(false, els);
     }
 }
 
@@ -64,7 +47,7 @@ const renderCurrentWeather = (data) => {
     forRender.humidity.textContent = `${data.current.humidity}%`;
     forRender.visibility.textContent = `${data.current.vis_km}`;
     forRender.airQuality.textContent = `${data.current.air_quality.pm10}`;
-    
+
 };
 
 searchInputEl.addEventListener("input", debounce((event) => {
@@ -74,6 +57,6 @@ searchInputEl.addEventListener("input", debounce((event) => {
     }
 }, 500));
 
-// setTimeout(() => {
-//     fetchAllData("Kyiv");
-// }, 50);
+setTimeout(() => {
+    fetchAllData("Berlin");
+}, 50);
